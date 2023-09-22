@@ -63,23 +63,7 @@ class activity:
 
 
 """)
-            
-    def checkArgv():
-        try:
-            if sys.argv[1] == "-h" or sys.argv[1] == "--help":
-                activity.printBanner()
-                print("USAGE: python3 nameFile.py [-h / --help] [-dp / --download-packs] [-i / --info]")
-            elif sys.argv[1] == "-dp" or sys.argv[1] == "--download-packs":
-                try:
-                    updater.downloadLibs()
-                except:pass
-                finally:
-                    os.system("cls || clear")
-                    print(f'{colorama.Fore.GREEN}[{colorama.Fore.YELLOW}i{colorama.Fore.GREEN}]{colorama.Fore.WHITE} Finish Install')
-                    time.sleep(3)
-            
-            else:pass
-        except:pass
+
         
     def BombAccountAuthAndKey(auths, keys, lengthOfjl : int, targetGuid, message):
         global rubiran
@@ -187,7 +171,6 @@ class activity:
 class MainActivity:
     def main():
         os.system("cls || clear")
-        activity.checkArgv()
         activity.printBanner()
         while 1:
             try:
@@ -317,12 +300,20 @@ class MainActivity:
                     os.system("cls || clear")
                     MainActivity.main()
                     
+                elif usr == "v" or usr == "version":
+                    print(f"{colorama.Fore.WHITE}\n0.0.1")
+                    MainActivity.main()
+                    
                 elif usr == "h" or usr == "help" or usr == "?":
                     print(f"""\n{colorama.Fore.WHITE}USAGE: attack the {colorama.Fore.YELLOW}account{colorama.Fore.WHITE} with {colorama.Fore.RED}auth {colorama.Fore.WHITE}and {colorama.Fore.RED}keys{colorama.Fore.WHITE}: -aaa / --attack-account-auth
        attack the {colorama.Fore.YELLOW}gap{colorama.Fore.WHITE} with {colorama.Fore.RED}auth {colorama.Fore.WHITE}and{colorama.Fore.RED} keys{colorama.Fore.WHITE}: -aga / --attack-gap-auth
                           
        attack the {colorama.Fore.YELLOW}account{colorama.Fore.WHITE} with {colorama.Fore.RED}login{colorama.Fore.WHITE}: -aal / --attack-account-login
        attack the {colorama.Fore.YELLOW}gap{colorama.Fore.WHITE} with {colorama.Fore.RED}login{colorama.Fore.WHITE}: -agl / --attack-gap-login
+
+{colorama.Fore.WHITE}Base commands: [ c / clear / cls ] => clear terminal
+              [ e / exit ] => finish program
+              [ v / version ] => see version of RedAttacker
 
 {colorama.Fore.RED}Note:{colorama.Fore.WHITE} set your auth and keys in "youAuths.py" and "youKeys.py" .
 """)
@@ -334,5 +325,42 @@ class MainActivity:
             except KeyboardInterrupt:
                 print(f"\n\n{colorama.Fore.RED}Exit{colorama.Fore.WHITE}")
                 exit()
+
+
+
+try:
+    if sys.argv[1] == "-h" or sys.argv[1] == "--help":
+        activity.printBanner()
+        print(f"{colorama.Fore.RED}USAGE: {colorama.Fore.WHITE}python3 nameFile.py [-h / --help] [-dp / --download-packs] [-i / --info]")
         
-MainActivity.main()
+    elif sys.argv[1] == "-dp" or sys.argv[1] == "--download-packs":
+        try:
+            updater.downloadLibs()
+        except:pass
+    
+    elif sys.argv[1] == "-v" or sys.argv[1] == "--version":
+        print(f'{colorama.Fore.WHITE}0.0.1')
+        
+    elif sys.argv[1] == "-i" or sys.argv[1] == '--info':
+        print(f"""\n{colorama.Fore.WHITE}USAGE: attack the {colorama.Fore.YELLOW}account{colorama.Fore.WHITE} with {colorama.Fore.RED}auth {colorama.Fore.WHITE}and {colorama.Fore.RED}keys{colorama.Fore.WHITE}: -aaa / --attack-account-auth
+       attack the {colorama.Fore.YELLOW}gap{colorama.Fore.WHITE} with {colorama.Fore.RED}auth {colorama.Fore.WHITE}and{colorama.Fore.RED} keys{colorama.Fore.WHITE}: -aga / --attack-gap-auth
+                          
+       attack the {colorama.Fore.YELLOW}account{colorama.Fore.WHITE} with {colorama.Fore.RED}login{colorama.Fore.WHITE}: -aal / --attack-account-login
+       attack the {colorama.Fore.YELLOW}gap{colorama.Fore.WHITE} with {colorama.Fore.RED}login{colorama.Fore.WHITE}: -agl / --attack-gap-login
+
+{colorama.Fore.WHITE}Base commands: [ c / clear / cls ] => clear terminal
+              [ e / exit ] => finish program
+              [ v / version ] => see version of RedAttacker
+
+{colorama.Fore.RED}Note:{colorama.Fore.WHITE} set your auth and keys in "youAuths.py" and "youKeys.py" .
+""")
+    
+    else:MainActivity.main()
+            
+except Exception as ESYS:
+    with open('Errors.txt', 'a') as ETF:
+        ETF.write(str(f"\n{ETF}"))
+        ETF.close()
+
+    MainActivity.main()
+
